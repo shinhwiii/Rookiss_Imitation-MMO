@@ -1,17 +1,50 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class UI_Button : MonoBehaviour
+public class UI_Button : UI_Base
 {
-    [SerializeField]
-    private TextMeshProUGUI _text;
+    enum Buttons
+    {
+        PointButton,
+    }
+
+    enum Texts
+    {
+        PointText,
+        ScoreText,
+    }
+
+    enum Images
+    {
+        ItemIcon,
+    }
+
+    enum GameObjects
+    {
+        TestObject,
+    }
+
+    private void Start()
+    {
+        Bind<Button>(typeof(Buttons));
+        Bind<TextMeshProUGUI>(typeof(Texts));
+        Bind<GameObject>(typeof(GameObjects));
+        Bind<Image>(typeof(Images));
+
+        GetButton((int)Buttons.PointButton).gameObject.AddUIEvent(OnButtonClicked);
+
+        GameObject gameObject = GetImage((int)Images.ItemIcon).gameObject;
+        AddUIEvent(gameObject, (PointerEventData data) => { gameObject.transform.position = data.position; }, Define.UIEvent.Drag);
+    }
 
     private int _score = 0;
 
-    public void OnButtonClicked()
+    public void OnButtonClicked(PointerEventData data)
     {
-        Debug.Log("clicked");
+        _score++;
 
-        _text.text = $"점수 : {++_score}점";
+        GetText((int)Texts.ScoreText).text = $"점수 : {_score}점";
     }
 }
