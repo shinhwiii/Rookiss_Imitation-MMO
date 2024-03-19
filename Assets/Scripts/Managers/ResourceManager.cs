@@ -16,7 +16,12 @@ public class ResourceManager
             return null;
         }
 
-        return Object.Instantiate(prefab, parent);
+        GameObject gameObject = Object.Instantiate(prefab, parent);
+        int index = gameObject.name.IndexOf("(Clone)");
+        if (index > 0)
+            gameObject.name = gameObject.name.Substring(0, index);
+
+        return gameObject;
     }
 
     public void Destroy(GameObject obj)

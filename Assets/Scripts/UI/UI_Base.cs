@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_Base : MonoBehaviour
+public abstract class UI_Base : MonoBehaviour
 {
-    Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
+    protected Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
+
+    public abstract void Init();
 
     protected void Bind<T>(Type type) where T : UnityEngine.Object
     {
@@ -36,22 +38,24 @@ public class UI_Base : MonoBehaviour
         return objects[index] as T;
     }
 
+    protected GameObject GetObject(int index)
+    {
+        return Get<GameObject>(index);
+    }
     protected TextMeshProUGUI GetText(int index)
     {
         return Get<TextMeshProUGUI>(index);
     }
-
     protected Button GetButton(int index)
     {
         return Get<Button>(index);
     }
-
     protected Image GetImage(int index)
     {
         return Get<Image>(index);
     }
 
-    public static void AddUIEvent(GameObject gameObject, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
+    public static void BindEvent(GameObject gameObject, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
     {
         UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(gameObject);
 
