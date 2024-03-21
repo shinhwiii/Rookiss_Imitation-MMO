@@ -5,6 +5,7 @@ public class Managers : MonoBehaviour
     private static Managers s_instance;
     private static Managers Instance { get { Init(); return s_instance; } }
 
+    private DataManager _data = new DataManager();
     private InputManager _input = new InputManager();
     private PoolManager _pool = new PoolManager();
     private ResourceManager _resource = new ResourceManager();
@@ -12,6 +13,7 @@ public class Managers : MonoBehaviour
     private SoundManager _sound = new SoundManager();
     private UIManager _ui = new UIManager();
 
+    public static DataManager Data { get { return Instance._data; } }
     public static InputManager Input { get { return Instance._input; } }
     public static PoolManager Pool { get { return Instance._pool; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
@@ -44,6 +46,7 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             s_instance = gameObject.GetComponent<Managers>();
 
+            s_instance._data.Init();
             s_instance._pool.Init();
             s_instance._sound.Init();
         }
