@@ -5304,7 +5304,7 @@ GameObject:
   - component: {fileID: 3188331157558509261}
   - component: {fileID: 1942908852809538416}
   - component: {fileID: 2949470976556286172}
-  - component: {fileID: -3139236946242782381}
+  - component: {fileID: 8508830129000246328}
   m_Layer: 6
   m_Name: Knight
   m_TagString: Untagged
@@ -5370,8 +5370,8 @@ MonoBehaviour:
   _attack: 0
   _defense: 0
   _moveSpeed: 0
---- !u!136 &-3139236946242782381
-CapsuleCollider:
+--- !u!65 &8508830129000246328
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5385,14 +5385,12 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.3901211
-  m_Height: 1.9543769
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.8322041, z: -0.1098789}
+  serializedVersion: 3
+  m_Size: {x: 0.58, y: 1.91, z: 0.53}
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &6750668172882441617
 GameObject:
   m_ObjectHideFlags: 0

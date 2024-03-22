@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
         Managers.Input.MouseAction -= OnMouseEvent;
         Managers.Input.MouseAction += OnMouseEvent;
+
+        Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
     }
 
     private void UpdateDie()
@@ -66,7 +68,7 @@ public class PlayerController : MonoBehaviour
         if (_lockTarget != null)
         {
             float distance = (_destPos - transform.position).magnitude;
-            if (distance <= 1.5f)
+            if (distance <= 1.25f)
             {
                 State = PlayerState.Skill;
                 return;
@@ -112,6 +114,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnHitEvent()
     {
+        if (_lockTarget != null)
+        {
+            Stat targetStat = _lockTarget.GetComponent<Stat>();
+            PlayerStat myStat = gameObject.GetComponent<PlayerStat>();
+
+            int damage = Mathf.Max(0, myStat.Attack - targetStat.Defense);
+
+            targetStat.Hp -= damage;
+        }
+
         if (_stopSkill)
         {
             State = PlayerState.Idle;
@@ -164,7 +176,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         bool raycastHit = Physics.Raycast(ray, out hit, 100f, _mask);
-        Debug.DrawRay(Camera.main.transform.position, ray.direction * 100f, Color.red, 1f);
+        // Debug.DrawRay(Camera.main.transform.position, ray.direction * 100f, Color.red, 1f);
 
         switch (evt)
         {
