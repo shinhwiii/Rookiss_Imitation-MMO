@@ -5356,6 +5356,7 @@ GameObject:
   - component: {fileID: 5096985906370670390}
   - component: {fileID: 5763894743800232115}
   - component: {fileID: 6007236776308863747}
+  - component: {fileID: 3686666118723545682}
   m_Layer: 0
   m_Name: UnityChan
   m_TagString: Untagged
@@ -5499,6 +5500,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3686666118723545682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283289629752350113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e9d7badce5bd14b87521c1b260b8ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _level: 0
+  _hp: 0
+  _maxHp: 0
+  _attack: 0
+  _defense: 0
+  _moveSpeed: 0
+  _exp: 0
+  _gold: 0
 --- !u!1 &2283289629752350115
 GameObject:
   m_ObjectHideFlags: 0
