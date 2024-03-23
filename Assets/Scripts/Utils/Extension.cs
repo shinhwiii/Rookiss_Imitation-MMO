@@ -13,4 +13,9 @@ public static class Extension
     {
         return Util.GetOrAddComponent<T>(gameObject);
     }
+
+    public static bool isValid(this GameObject gameObject)
+    {
+        return gameObject != null && gameObject.activeSelf;
+    }
 }

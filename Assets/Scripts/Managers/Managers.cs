@@ -5,6 +5,13 @@ public class Managers : MonoBehaviour
     private static Managers s_instance;
     private static Managers Instance { get { Init(); return s_instance; } }
 
+    #region Contents
+    private GameManager _game = new GameManager();
+
+    public static GameManager Game { get { return Instance._game; } }
+    #endregion
+
+    #region Core
     private DataManager _data = new DataManager();
     private InputManager _input = new InputManager();
     private PoolManager _pool = new PoolManager();
@@ -20,7 +27,7 @@ public class Managers : MonoBehaviour
     public static SceneManagerEx Scene { get { return Instance._scene; } }
     public static SoundManager Sound { get { return Instance._sound; } }
     public static UIManager UI { get { return Instance._ui; } }
-
+    #endregion
 
     private void Start()
     {
