@@ -5,6 +5,8 @@ public class GameManager
 {
     GameObject _player;
 
+    public GameObject GetPlayer() { return _player; }
+
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
 
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)

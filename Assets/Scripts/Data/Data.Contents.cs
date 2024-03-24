@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Data
 {
@@ -9,10 +8,9 @@ namespace Data
     public class Stat
     {
         public int level;
-        [SerializeField]
-        private int hp;
-        [SerializeField]
-        private int attack;
+        public int maxHp;
+        public int attack;
+        public int totalExp;
     }
 
     [Serializable]
