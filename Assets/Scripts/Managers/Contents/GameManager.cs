@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class GameManager
     public GameObject GetPlayer() { return _player; }
 
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
+
+    public Action<int> OnSpawnEvent;
 
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
@@ -20,19 +23,12 @@ public class GameManager
                 break;
             case Define.WorldObject.Monster:
                 _monsters.Add(gameObject);
+                if (OnSpawnEvent != null)
+                    OnSpawnEvent.Invoke(1);
                 break;
         }
 
         return gameObject;
-    }
-
-    public Define.WorldObject GetWorldObjectType(GameObject gameObject)
-    {
-        BaseController bc = gameObject.GetComponent<BaseController>();
-        if (bc == null)
-            return Define.WorldObject.Unknown;
-
-        return bc.WorldObjectType;
     }
 
     public void Despawn(GameObject gameObject)
@@ -47,10 +43,24 @@ public class GameManager
                 break;
             case Define.WorldObject.Monster:
                 if (_monsters.Contains(gameObject))
+                {
                     _monsters.Remove(gameObject);
+                    if (OnSpawnEvent != null)
+                        OnSpawnEvent.Invoke(-1);
+                }
                 break;
         }
 
         Managers.Resource.Destroy(gameObject);
     }
+
+    public Define.WorldObject GetWorldObjectType(GameObject gameObject)
+    {
+        BaseController bc = gameObject.GetComponent<BaseController>();
+        if (bc == null)
+            return Define.WorldObject.Unknown;
+
+        return bc.WorldObjectType;
+    }
+
 }
